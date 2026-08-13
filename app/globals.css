@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
+/* ============================================================
+   SHREE CHAMUNDA SWINGS — DESIGN TOKENS (PRD §2)
+   Light + warm by default. Sage/deep-wood only in accent bands.
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-ivory: #f7f3ea;
+  --color-cream: #fcfaf5;
+  --color-wood-natural: #9a5a24;
+  --color-wood-deep: #633816;
+  --color-sage: #35452a;
+  --color-gold: #b58a4a;
+  --color-white: #ffffff;
+  --color-text-primary: #2a2118;
+  --color-text-muted: #7a6e5e;
+  --color-border: #e7dfcf;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand palette */
+  --color-ivory: var(--color-ivory);
+  --color-cream: var(--color-cream);
+  --color-wood: var(--color-wood-natural);
+  --color-wood-deep: var(--color-wood-deep);
+  --color-sage: var(--color-sage);
+  --color-gold: var(--color-gold);
+  --color-ink: var(--color-text-primary);
+  --color-muted: var(--color-text-muted);
+  --color-line: var(--color-border);
+
+  /* Typography */
+  --font-sans: var(--font-inter), var(--font-manrope), ui-sans-serif, system-ui,
+    sans-serif;
+  --font-display: var(--font-playfair), var(--font-cormorant), Georgia,
+    serif;
+
+  /* Radii */
+  --radius-control: 8px;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+
+  /* Warm-tinted elevation */
+  --shadow-soft: 0 8px 24px -12px rgba(99, 56, 22, 0.08);
+  --shadow-card: 0 4px 20px -8px rgba(99, 56, 22, 0.08),
+    0 20px 40px -24px rgba(99, 56, 22, 0.14);
+  --shadow-hover: 0 8px 30px -10px rgba(99, 56, 22, 0.16),
+    0 28px 56px -28px rgba(99, 56, 22, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-text-primary);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: rgba(181, 138, 74, 0.28);
+    color: var(--color-text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-wood-natural);
+    outline-offset: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Editorial eyebrow label — tight elegant letter-spacing */
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Fluid type scale helpers */
+  .text-display-sm {
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  .text-display-md {
+    font-size: clamp(2.5rem, 1.8rem + 3.2vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+  }
+
+  .text-display-lg {
+    font-size: clamp(3rem, 2rem + 5vw, 6.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+
+  /* Soft editorial card surface */
+  .surface-cream {
+    background-color: var(--color-cream);
+  }
+
+  /* Scroll-snapping thin scrollbar for drawer/rail */
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gold) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
